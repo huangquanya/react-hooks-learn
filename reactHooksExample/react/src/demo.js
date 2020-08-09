@@ -1,20 +1,50 @@
-import React, { useRef, useState } from "react"
+import React, { useState, useEffect, useRef } from 'react'
 
-export const MyComponent = () =>{
-    const containerElementRef = useRef();
-    const [message,setMessage] = useState(
-        "点击按钮得到父组件container的宽度"
-    );
+export const MyComponent = () => {
+    const [visible, setVisible] = useState(false);
 
-    const caculateContainerWidth = () =>{
-        setMessage(`Container 宽度:${containerElementRef.current.clientWidth}px`)
-    }
     return (
-        <div className="container" ref={containerElementRef} >
-            <h2>{message}</h2>
-            <button onClick={caculateContainerWidth}>
-                计算 container 宽度
+        <>
+            {visible&&<MyChildComponent />}
+            <button onClick={() => setVisible(!visible)}>
+                控制子组件是否渲染的按钮
             </button>
-        </div>
+        </>
+    )
+
+}
+
+export const MyChildComponent = () =>{
+    const [filter,setFilter] = useState("")
+    const [userCollection,setUserCollection] = useState([])
+
+    const mountedRef = useRef(false);
+
+    const setSafeUserCollection = (userCollection)=>{
+        mountedRef.current&&setUserCollection(userCollection)
+    }
+
+    useEffect(()=>{
+        mountedRef.current = true;
+        return ()=>(mountedRef.current = false);
+    },[])
+
+    useEffect(()=>{
+        setTimeout(() => {
+            fetch(`https://jsonplaceholder.typicode.com/users?name_like=${filter}`)
+                .then(response => response.json())
+                .then(json => setSafeUserCollection(json))
+        }, 2000);
+    },[filter])
+
+    return (
+       <div>
+           <input value={filter} onChange={e => setFilter(e.target.value)} />
+           <ul>
+               {userCollection.map((user, index)=>(
+                   <li key={index}> {user.name} </li>
+               ))}
+           </ul>
+       </div>
     )
 }

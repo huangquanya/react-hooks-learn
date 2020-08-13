@@ -1,0 +1,25 @@
+<script>
+    let a = [1,2,[3,[4,[5]]]]
+    function flat(arr) {
+        let b = []
+        let c = []
+        const help = (a) => {
+            if(c.includes(a)){
+                return
+            }else{
+                c.push(a)
+            }
+            a.map(i => {
+                if (typeof i == 'object') {
+                    help(i)
+                } else {
+                    b.push(i)
+                }
+            })
+        }
+        help(arr)
+        return b
+    }
+    console.log(flat(a))
+
+</script>

@@ -1,50 +1,26 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useCallback, memo } from 'react'
 
-export const MyComponent = () => {
-    const [visible, setVisible] = useState(false);
+export const MyComponent = () =>{
+    const [username, setUsername] = useState('John')
+    const [lastname, setLastname] = useState('Doe');
+
+    const resetNameCallbak = useCallback(()=>setUsername(''),[])
 
     return (
         <>
-            {visible&&<MyChildComponent />}
-            <button onClick={() => setVisible(!visible)}>
-                控制子组件是否渲染的按钮
-            </button>
+            <h3>
+                {username}{lastname}
+            </h3>
+            <input value={username} onChange={e=>setUsername(e.target.value)}  />
+            <input value={lastname} onChange={e=>setLastname(e.target.value)}  />
+            <ResetValue onReset={resetNameCallbak}>重置姓名</ResetValue>
         </>
     )
+};
 
-}
-
-export const MyChildComponent = () =>{
-    const [filter,setFilter] = useState("")
-    const [userCollection,setUserCollection] = useState([])
-
-    const mountedRef = useRef(false);
-
-    const setSafeUserCollection = (userCollection)=>{
-        mountedRef.current&&setUserCollection(userCollection)
-    }
-
-    useEffect(()=>{
-        mountedRef.current = true;
-        return ()=>(mountedRef.current = false);
-    },[])
-
-    useEffect(()=>{
-        setTimeout(() => {
-            fetch(`https://jsonplaceholder.typicode.com/users?name_like=${filter}`)
-                .then(response => response.json())
-                .then(json => setSafeUserCollection(json))
-        }, 2000);
-    },[filter])
-
+const ResetValue = memo(props =>{
+    console.log("应该只在第一次渲染时渲染，检查memo+callback")
     return (
-       <div>
-           <input value={filter} onChange={e => setFilter(e.target.value)} />
-           <ul>
-               {userCollection.map((user, index)=>(
-                   <li key={index}> {user.name} </li>
-               ))}
-           </ul>
-       </div>
+        <button onClick={props.onReset}>重置值</button>
     )
-}
+});

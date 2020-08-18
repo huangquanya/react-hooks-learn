@@ -1,0 +1,4 @@
+react-router
+Link借助了pushState让URL变化 页面无刷新
+Router 看地址栏URL和path属性匹不匹配，匹配则显示
+BrowserRouter HashRouter  Router包在最外面，确保里面包裹的组件都重新渲染

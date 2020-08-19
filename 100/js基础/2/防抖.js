@@ -7,3 +7,4 @@ function debounce(fn,time){
         },time)
     }
 }
+document.addEventListener('mousemove',)

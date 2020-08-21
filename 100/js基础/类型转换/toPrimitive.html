@@ -1,0 +1,27 @@
+<script>
+    let obj = {
+        toString(){//转字符串
+            return 'str'
+        },
+        valueOf(){//转value
+            return 0
+        },
+        [Symbol.toPrimitive]:(hint)=>{ //es6新增
+            console.log('参数',hint)
+            if(hint==='string'){
+                return 'hhhh'
+            }else if(hint==='number'){
+                return 0
+            }
+        }
+    }
+    console.log(String(obj))
+    console.log(Number(obj))
+    console.log(obj==null,obj==undefined)
+    //[object object]
+    //NaN
+
+    // str
+    // 0
+    // true
+</script>

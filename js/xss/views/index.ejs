@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <a href="/?xss=<script>alert(document.cookie)</script>">xss1</a>
+    <a href="/?xss=<style>a{color:red}</style>">xss2</a>
+    <a href="/?xss=<iframe src='http://www.baidu.com'></iframe>">xss3</a>
+    首页
+    <%- username %>
+    <%- xss %> 
+    <%= username %>
+    <% username %>
+    <%- dataFromDB %>
+
+    <!--  :'脚本' 标签，用于流程控制，无输出 什么都不加表示要进行逻辑运算-->
+    <!-- - 表示不对内容进行编译，是什么执行什么 -->
+    <!-- %= 表示ejs会对内容进行转译 -->
+
+</body>
+
+</html>

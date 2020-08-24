@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <button id="toogle">toogle</button>
+    <div id="content">
+        内容
+    </div>
+    <script>
+        const toogle = document.querySelector('#toogle')
+        const content = document.querySelector('#content');
+        toogle.addEventListener('click',(e)=>{
+            content.style.display = 'block';
+            e.stopPropagation();
+        })
+        content.addEventListener('click',(e)=>{
+            e.stopPropagation()
+        })
+        document.body.addEventListener('click',()=>{
+            content.style.display = 'none'
+        })
+    </script>
+</body>
+</html>

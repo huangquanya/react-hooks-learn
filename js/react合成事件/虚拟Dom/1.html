@@ -1,29 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div>
-        <ul></ul>
-        <div>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
-    <script>
-        let Vnode = {
-            type:'div',
-            props:{
-                children:[
-                    {type:'ul'},
-                    {type:'div'}
-                ]
+<!-- <div>
+  <ul class="wrap">
+    <li>1</li>
+    <li>2</li>
+  </ul>
+</div> -->
+<div id="root"></div>
+<script>
+    // React.createElement 返回的 就是 虚拟DOM
+    let Vnode = {
+      type: 'div',
+      props: {
+        children: [
+          {
+            type: 'ul', props: {
+              className: 'wrap',
+              children: [
+                { type: 'li', props: { children: ['1'] }},
+                { type: 'li', props: { children: ['2'] }},
+              ]
             }
-        }
-        // 跨平台：nodeBrowser，保证性能下限
-    </script>
-</body>
-</html>
+          }
+        ]
+      }
+    }
+    // Vnode.prop.children
+    // document.queryselector('div').childNodes
+    // 跨平台: Node Browser
+    // document.queryselector('div').appendChild(XXX)
+    // Vnode.prop.children.push(XXXX)
+    // 保证性能下限
+  
+    // jsx =>createElement => 虚拟DOM  babel
+    // 虚拟DOM => 渲染出来
+    function render(vnode, container) {
+        const {type, props} = vnode;
+        if(!type){
+            container.textContent=vnode;
+        };
+        const dom = document.createElement(type);
+        props?.children?.forEach(child => {
+            render(child,dom)
+        });
+
+        container.appendChild(dom);
+    }
+    render(Vnode, document.getElementById('root'))
+  </script>
+  

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="a">1</div>
+    <div id="b">2</div>
+    <div id="c">3</div>
+    <script>
+        const DomA = document.querySelector('#a')
+        const DomB = document.querySelector('#b')
+        const DomC = document.querySelector('#c')
+        function timer(){
+            DomA.style.width = DomA.offsetWidth + 1 + 'px' //未发生重排，因为没有对domA进行修改
+            DomB.style.width = DomA.offsetWidth + 1 + 'px' //发生重排 ，让上一步更改的with立即重排
+            DomC.style.width = DomA.offsetWidth + 1 + 'px'//发生重排 ，让上一步更改的with立即重排
+                                                            //width发生变更，重排更新页面
+        }
+        setTimeout(timer(),200)
+    </script>
+</body>
+</html>

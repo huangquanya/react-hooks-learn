@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head> 
+<body>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.min.js"></script>
+    <div id="root">
+        <div @click="changeData">切换数据</div>
+        <li v-for="item in list" :key="item.id">{{item.text}}</li>
+    </div>
+    <script>
+        // MVVM的范围
+        new Vue({
+            el:'#root',
+            data(){
+                return {
+                    // diff
+                    list:[],//数据 vnode->DOM更新
+                    list1:[],//oldState
+                    list2:[],//newState
+                    nowDate:'',
+                    updateTime:''
+                }
+            },
+            methods:{
+                changeData(){
+                    this.nowDate = Date.now();
+                    this.list = this.list2;
+                }
+            },
+            created(){
+                for(let i = 0;i<=10000;i++){
+                    this.list1.push({
+                        id:i,
+                        text:i
+                    })
+                    this.list2.push({
+                        id:i*2,
+                        text:10000-i
+                    })
+                }
+                this.list = this.list1
+            },
+            updated(){
+                const data = Date.now();
+                console.log(`updateTime:${data-this.nowDate}`)
+            }
+        })
+    </script>
+    <!-- 1. js文件是个静态资源 http 1.0 text/js image/png text/html text/css 
+    动态资源 database 服务器压力很大
+    TCP连接-》HTTP请求、响应
+    连接上限 多线程 ngnix 进程 启动
+    2. bootcdn.cn 动态 服务器上找数据
+        ndoe 读mysql -》 template
+        用户量和访问量大后
+        ngnix 负载均衡  proxy代理
+        分布式  主从关系
+        用户怎么来？域名-DNS->ip
+        分流
+    3. 
+    动态IP -> 电脑 MAC地址 -> 路由：网络层IP
+    MAC地址代表本机独一无二的网卡号 -->
+</body>
+</html>

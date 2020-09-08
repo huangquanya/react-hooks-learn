@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            transition: all .4s;
+            transform-style: preserve-3d;
+        }
+
+        div .front,
+        div .oppsite {
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom:0;  
+        }
+        div .front {
+            background-color: red;
+            z-index: 1;
+        }
+        div.oppsite {
+            background-color: blue;
+            transform: rotateY(180deg)
+        }
+
+        div:hover {
+            transform: rotateY(180deg)
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        　　<div class="oppsite">反面的内容</div>
+        　　<div class="front">正面的内容</div>
+        </div>
+        
+</body>
+
+</html>

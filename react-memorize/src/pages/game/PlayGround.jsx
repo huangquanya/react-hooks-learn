@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-export default function PlayGround() {
-    const [end,setEnd] = useState(false)
+export default function PlayGround(props) {
+    const {setEnd} = props
     let arr = [1, 2, 3, 4, 5, 6, 7, 8]
     arr = arr.slice(0).concat(arr)
     console.log(arr)
@@ -11,7 +11,7 @@ export default function PlayGround() {
         let res = 8;
         // console.log(e.target.classList[0])
         return (e) => {
-            console.log(e.target.classList)
+            // console.log(e.target.classList)
             let el = e.target.parentNode
             if (el.classList.contains('invisible')) {
                 console.log('相同节点', res)
@@ -68,7 +68,6 @@ export default function PlayGround() {
                 }
                 )}
             </ul>
-            {end&&<p>恭喜你，挑战成功</p>}
         </div>
 
     )

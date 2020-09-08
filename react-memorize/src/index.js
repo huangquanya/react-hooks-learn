@@ -12,7 +12,6 @@ function App() {
         setShowHome(!showHome)
     }
   return (
-
       <>
       {showHome&&<Home setV={()=>setVisible()} />}
       {!showHome&&<Game setV={()=>setVisible()} />}

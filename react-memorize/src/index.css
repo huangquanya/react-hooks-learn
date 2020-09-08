@@ -1,7 +1,69 @@
-div,h2,h3{
+div,h2,h3,ul,li{
     margin: 0;
     padding: 0;
 }
 div{
     text-align: center;
+}
+ul,li{
+    list-style: none;
+}
+.homeTitle{
+    margin-top: 2rem;
+    font-size: 2rem;
+}
+.newGame{
+    margin-top: 5rem;
+    font-size: 1rem;
+}
+.game {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.playground {
+    display: flex;
+    box-sizing: border-box;
+    width: 20rem;
+    height: auto;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.invisible{
+    opacity: 0;
+}
+.playground-carwrap {
+    position: relative;
+    display: inline-block;
+    height: 5rem;
+    width: 5rem;
+    flex: 0 0 auto;
+    transition: all .4s;
+    transform-style: preserve-3d;
+}
+
+.playground-carwrap .front,
+.playground-carwrap .oppsite {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom:0;  
+    border: 1px solid #000;
+
+}
+.playground-carwrap .front {
+    z-index: 1;
+}
+.playground-carwrap .oppsite {
+    transform: rotateY(180deg)
+}
+
+.playground-carwrap.rotate {
+    transform: rotateY(180deg)
+}
+.backHome:hover,
+.newGame:hover
+{
+    cursor: pointer;
 }

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // let originPush = Array.prototype.push
+        // Array.prototype.push = function(...args){
+        //     // 监听
+        //     return originPush(...args)
+        // }
+        let obj = {a:1,b:2}
+        let handlers = []
+
+        let pObj = new Proxy(obj,{
+            set(obj, prop, val){
+                console.log('set')
+                return Reflect.set(obj,prop,val)
+            },
+            get(obj,prop){
+                console.log('get')
+                handlers.push([obj,prop])
+                return Reflect.get(obj,prop)
+            }
+        })
+        pObj.a = 123;
+        console.log(pObj.b)
+
+        let obj1 = new Map();
+
+        function autorun(handler){
+            handler()
+            console.log(handlers)
+            for(let [ob,prop] of handlers){
+                let arr = [];
+                let map = new Map();
+                map.set(prop, arr);
+                obj1.set(ob.map);
+            }
+        }
+        autorun(()=>{
+            console.log(pObj.a);
+        })
+    </script>
+</body>
+</html>

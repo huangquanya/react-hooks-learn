@@ -9,3 +9,10 @@
 6. Object.assign(late，pre)  对象pre浅复制到late
 7. 查找字符串 includes() startsWith() endWith()第二个参数表示从哪里开始查找
 8.  repeat() 方法，它接受一个数字参数作为字符串的重复次数。'a'.repeat(2) -> 'aa'
+9. 模板字符串``
+10. Symbol
+11. Set\Map
+12. 迭代器 iterator: function*(){yield 3;}
+13. for of循环可迭代元素
+14. class语法
+15. ESMoudle

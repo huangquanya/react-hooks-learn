@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let xhr = new XMLHttpRequest()
+let url = 'http://neteasecloudmusicapi.zhaoboy.com/search?keywords=%E6%B5%B7%E9%98%94%E5%A4%A9%E7%A9%BA'
+
+xhr.open('get',url,true)//第三个参数true发异步请求，false发同步请求
+// GET方法，send()方法无参数，或参数为null；
+// POST方法，send()方法的参数为要发送的数据
+
+// 0(UNSENT):未初始化。尚未调用open()方法
+// 1(OPENED):启动。已经调用open()方法，但尚未调用send()方法
+// 2(HEADERS_RECEIVED):发送。己经调用send()方法，且接收到头信息
+// 3(LOADING):接收。已经接收到部分响应主体信息
+// 4(DONE):完成。已经接收到全部响应数据，而且已经可以在客户端使用了
+xhr.onreadystatechange = function(){
+    try{
+        if (xhr.readyState === 4) {
+            // 请求正常
+            if (xhr.status === 200) {
+              // 处理响应
+              //parse将JSON转对象
+              // stringify将对象转JSON
+              console.log(JSON.stringify(JSON.parse(xhr.responseText)))
+            } else {
+              // 处理状态码不为200
+            }
+        }
+        else{
+            // 还未接收到全部响应数据
+            }
+    }catch(e){
+        console.log('err'+e)
+    }
+}
+
+xhr.send();//在onreadystatechange逻辑之后调用，确保0，1时处理的逻辑不会丢失
+  </script>
+</body>
+</html>

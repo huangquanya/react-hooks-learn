@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            float: left;
+        }
+
+        /* .clear::after {
+            content: '';
+            clear: both;
+            display: block;
+        } */
+        /* .cls{
+            clear: left;
+        } */
+        /* BFC 规则： 计算父容器高度 float元素会参与在内
+        overflow：不为visiable 就会创建BFC
+         */
+        .clear{
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="border: 2px solid blue; padding:3px;" class="clear">
+        <img src="https://aecpm.alicdn.com/tfscom/TB1B8q1iP39YK4jSZPcXXXrUFXa.jpg" />
+        <img src="https://img.alicdn.com/tps/i4/https://img.alicdn.com/tps/i4//TB1tjr.e4vbeK8jSZPfSuuriXXa.jpg_400x400q90.jpg" />
+        <!-- <div class="cls">hahahghhhhhhhhh</div> -->
+    </div>
+</body>
+
+</html>

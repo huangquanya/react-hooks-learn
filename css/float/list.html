@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul li:nth-child(odd){
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <!-- position
+        relative: 自身
+        absolute：(包含快) 相对于它的包含块来定位
+        如何确定包含块
+    -->
+    <style>
+        .inner2{
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            top: 0;
+            left: 0;
+            background-color: aqua;
+        }
+        .out{
+            position: relative;
+            background-color: yellow;
+            width: 400px;
+            height: 400px;
+        }
+        .inner1{
+            width: 100px;
+            height: 100px;
+            transform: translate3d(0, 100px, 0);
+            border: 1px solid #000;
+        }
+    </style>
+    <div class="out">
+        <div class="inner1">
+            <div class="inner2"></div>
+        </div>
+    </div>
+</body>
+</html>

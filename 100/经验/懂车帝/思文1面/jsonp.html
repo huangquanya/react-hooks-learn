@@ -1,0 +1,43 @@
+<!-- <script>
+    function foo(res){
+        console.log(res)
+    }
+</script> -->
+<!-- foo({code:0},XXX)
+script 返回的内容当作js执行
+{code：0}
+-->
+<!-- <script src="/api?a=1&b=2"></script> -->
+<body>
+    
+</body>
+<script>
+    const data = {
+        a:1,
+        b:2
+    }
+    function jsonp(url,data,timeout){
+        return new Promise((resolve,reject)=>{
+            let methodName = `jsonpCallback${Date.now()}`;
+            window[methodName] = function(res){
+                console.log(res)
+                resolve(res);
+                delete window[methodName];
+                clearTimeout(timer)
+                document.body.removeChild(scriptNode);
+            }
+            let query = '';
+            Object.keys(data).forEach((key,value)=>{
+                query= query+`${key}=${value}&`
+            })
+            const scriptNode = document.createElement('script');
+            scriptNode.src = url + `?${query}callback=`+methodName;
+            document.body.appendChild(scriptNode);
+            let timer = setTimeout(() => {
+                reject('请求超时')
+            }, timeout);
+            
+        })
+    }
+    jsonp('/api',data,3000)
+</script>
